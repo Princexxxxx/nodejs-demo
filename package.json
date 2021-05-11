@@ -1,0 +1,13 @@
+{
+    "name": "nodejs-demo",
+    "version": "1.0.0",
+    "author": "qixiong.li",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "qs": "^6.10.1"
+    }
+}

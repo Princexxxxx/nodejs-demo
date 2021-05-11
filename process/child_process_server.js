@@ -1,15 +1,17 @@
 const http = require('http');
 const fork = require('child_process').fork;
 
-const server = http.createServer((req, res) => {
-    if (req.url == '/compute') {
-        const compute = fork('./process/fork.js');
+const server = http.createServer();
+
+server.on('request', (req, res) => {
+    if(req.url == '/compute/fibonacci') {
+        const compute = fork(__dirname, './child_process_fork.js');
 
         compute.send('开启一个新的子进程');
 
         // 当一个子进程使用 process.send() 发送消息时会触发 'message' 事件
-        compute.on('message', sum => {
-            res.end(`Sum is ${sum}`);
+        compute.on('message', result => {
+            res.end(`fibonacci 44 item: ${result}`);
             compute.kill();
         });
 
@@ -19,10 +21,12 @@ const server = http.createServer((req, res) => {
             compute.kill();
         })
     } else {
-        res.end(`ok`);
+        res.end('ok');
     }
-});
+})
 
-server.listen(3000, () => {
-    console.log(`server started at 3000`);
+server.listen(3001, () => {
+    process.title = 'Fibonacci child_process Server';
+
+    console.log('进程id:', process.pid);
 });

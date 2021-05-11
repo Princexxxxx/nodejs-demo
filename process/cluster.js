@@ -8,12 +8,11 @@ const cluster = require('cluster');
 const http = require('http');
 const cpus = require('os').cpus();
 
-console.log('cpu count: ', cpus.length);
+console.log('server start, cpu count: ', cpus.length);
 
 if (cluster.isMaster) {
-    // Fork workers.
     for (let i = 0; i < cpus.length; i++) {
-        cluster.fork();
+        cluster.fork(); // 启动子进程
     }
 
     cluster.on('exit', (worker, code, signal) => {
@@ -23,10 +22,12 @@ if (cluster.isMaster) {
     // Worker可以共享同一个TCP连接, 这里是一个http服务器
     const server = http.createServer((req, res) => {
         res.writeHead(200);
+
         res.end(JSON.stringify(cpus));
     });
 
-    server.listen(8000, () => {
+    server.listen(3002, () => {
         process.title = 'Cluster Server';
+        console.log('进程id:', process.pid);
     });
 }
