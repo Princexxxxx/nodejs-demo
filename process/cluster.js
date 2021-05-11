@@ -28,6 +28,6 @@ if (cluster.isMaster) {
 
     server.listen(3002, () => {
         process.title = 'Cluster Server';
-        console.log('进程id:', process.pid);
+        console.log('子进程id:', process.pid);
     });
 }

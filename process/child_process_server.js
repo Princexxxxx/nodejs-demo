@@ -5,7 +5,7 @@ const server = http.createServer();
 
 server.on('request', (req, res) => {
     if(req.url == '/compute/fibonacci') {
-        const compute = fork(__dirname, './child_process_fork.js');
+        const compute = fork('./process/child_process_fork.js');
 
         compute.send('开启一个新的子进程');
 
@@ -21,6 +21,7 @@ server.on('request', (req, res) => {
             compute.kill();
         })
     } else {
+        console.info(`${req.url} 请求结束`);
         res.end('ok');
     }
 })
