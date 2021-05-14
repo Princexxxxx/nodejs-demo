@@ -17,12 +17,12 @@ server.on('request', (req, res) => {
 
         res.end(`fibonacci 44 item: ${result}`);
     } else {
-        console.info(`${req.url} 请求结束`);
-        res.end('Ok')
+        console.info(`${req.url} 请求结束 ${new Date().getTime()}`);
+        res.end('Hello World')
     }
 });
 
 server.listen(3000, () => {
     process.title = 'Fibonacci Compute Server';
-    console.log('进程id:', process.pid);
+    console.info('Server Start at 3000 port');
 });

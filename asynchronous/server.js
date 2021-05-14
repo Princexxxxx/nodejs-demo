@@ -17,17 +17,15 @@ server.on('request', (req, res) => {
         console.info('延时计时');
         console.time('延时耗时');
 
-        // setTimeout或setInterval创建的定时器会被插入到定时器观察者内部的一个红黑树中
-        // 可能会存在超时
+        // 定时器的问题在于，它并非精确的
         setTimeout(() => {
             console.timeEnd('延时耗时');
         }, 5000);
 
-        res.end('Ok');
+        res.end('Hello World');
     }
 })
 
 server.listen('3004', () => {
     process.title = 'Asynchronous Server';
-    console.log('进程id:', process.pid);
 })

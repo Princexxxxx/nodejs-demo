@@ -21,13 +21,11 @@ server.on('request', (req, res) => {
             compute.kill();
         })
     } else {
-        console.info(`${req.url} 请求结束`);
-        res.end('ok');
+        console.info(`${req.url} 请求结束 ${new Date()}`);
+        res.end('Hello World');
     }
 })
 
 server.listen(3001, () => {
     process.title = 'Fibonacci child_process Server';
-
-    console.log('进程id:', process.pid);
 });

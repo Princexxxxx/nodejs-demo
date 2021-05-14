@@ -6,13 +6,12 @@ server.on('request', (req, res) => {
     // TypeError: Cannot read property 'c' of undefined
     console.log({}.b.c);
 
-    res.end('Ok')
+    res.end('Hello World')
 })
 
 
 server.listen('3003', () => {
     process.title = 'Process Exception Server';
-    console.log('进程id:', process.pid);
 })
 
 
